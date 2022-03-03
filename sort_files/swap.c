@@ -16,7 +16,7 @@ void	ft_sa(t_stack *sort)
 {
 	int	tmp;
 
-	if(sort->cola_size > 1)
+	if (sort->cola_size > 1)
 	{
 		tmp = sort->cola[0];
 		sort->cola[0] = sort->cola[1];
@@ -28,7 +28,7 @@ void	ft_sb(t_stack *sort)
 {
 	int	tmp;
 
-	if(sort->colb_size > 1)
+	if (sort->colb_size > 1)
 	{
 		tmp = sort->colb[0];
 		sort->colb[0] = sort->colb[1];

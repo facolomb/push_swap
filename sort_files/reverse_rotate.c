@@ -14,30 +14,54 @@
 
 void	ft_rra(t_stack *sort)
 {
-	int	new[sort->cola_size];
+	int	*new;
 	int	i;
 
-	i = 0;
-	new[0] = sort->cola[sort->cola_size - 1];
-	while (i < sort->cola_size)
+	if (sort->cola_size == 2)
+		ft_sa(sort);
+	else if (sort->cola_size > 2)
 	{
-		new[i + 1] = sort->cola[i];
+		new = ft_calloc(sizeof(int), sort->cola_size);
+		i = 0;
+		new[0] = sort->cola[sort->cola_size - 1];
+		while (i < sort->cola_size)
+		{
+			new[i + 1] = sort->cola[i];
+			i++;
+		}
+		while (i >= 0)
+		{
+			sort->cola[i] = new[i];
+			i--;
+		}
+		free(new);
 	}
-	sort->cola = new;
 }
 
 void	ft_rrb(t_stack *sort)
 {
-	int	new[sort->colb_size];
+	int	*new;
 	int	i;
 
-	i = 0;
-	new[0] = sort->colb[sort->colb_size - 1];
-	while (i < sort->colb_size)
+	if (sort->colb_size == 2)
+		ft_sb(sort);
+	else if (sort->colb_size > 2)
 	{
-		new[i + 1] = sort->colb[i];
+		new = ft_calloc(sizeof(int), sort->colb_size);
+		i = 0;
+		new[0] = sort->colb[sort->colb_size - 1];
+		while (i < sort->colb_size)
+		{
+			new[i + 1] = sort->colb[i];
+			i++;
+		}
+		while (i >= 0)
+		{
+			sort->colb[i] = new[i];
+			i--;
+		}
+		free(new);
 	}
-	sort->colb = new;
 }
 
 void	ft_rrr(t_stack *sort)
