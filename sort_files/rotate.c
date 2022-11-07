@@ -12,60 +12,52 @@
 
 #include "../push_swap.h"
 
-void	ft_ra(t_stack *sort)
+void	ft_ra(t_stack *sort, int is_push)
 {
-	int	*new;
 	int	i;
+	int	tmp;
 
 	if (sort->cola_size == 2)
-		ft_sa(sort);
+		ft_sa(sort, 1);
 	else if (sort->cola_size > 2)
 	{
-		new = ft_calloc(sizeof(int), sort->cola_size);
-		i = sort->cola_size - 1;
-		new[i] = sort->cola[0];
-		while (i > 0)
+		i = 0;
+		tmp = sort->cola[0];
+		while (i < sort->cola_size - 1)
 		{
-			new[i - 1] = sort->cola[i];
-			i--;
-		}
-		while (i < sort->cola_size)
-		{
-			sort->cola[i] = new[i];
+			sort->cola[i] = sort->cola[i + 1];
 			i++;
 		}
-		free(new);
+		sort->cola[i] = tmp;
 	}
+	if (is_push == 0)
+		ft_printf("ra\n");
 }
 
-void	ft_rb(t_stack *sort)
+void	ft_rb(t_stack *sort, int is_push)
 {
-	int	*new;
+	int	tmp;
 	int	i;
 
 	if (sort->colb_size == 2)
-		ft_sb(sort);
+		ft_sb(sort, 1);
 	else if (sort->colb_size > 2)
 	{
-		new = ft_calloc(sizeof(int), sort->colb_size);
-		i = sort->colb_size - 1;
-		new[i] = sort->colb[0];
-		while (i > 0)
+		i = 0;
+		tmp = sort->colb[0];
+		while (i < sort->colb_size - 1)
 		{
-			new[i - 1] = sort->colb[i];
-			i--;
-		}
-		while (i < sort->colb_size)
-		{
-			sort->colb[i] = new[i];
+			sort->colb[i] = sort->colb[i + 1];
 			i++;
 		}
-		free(new);
+		sort->colb[i] = tmp;
 	}
+	if (is_push == 0)
+		ft_printf("rb\n");
 }
 
 void	ft_rr(t_stack *sort)
 {
-	ft_ra(sort);
-	ft_rb(sort);
+	ft_ra(sort, 0);
+	ft_rb(sort, 0);
 }

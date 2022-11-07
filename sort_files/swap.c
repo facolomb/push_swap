@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void	ft_sa(t_stack *sort)
+void	ft_sa(t_stack *sort, int is_rotate)
 {
 	int	tmp;
 
@@ -21,10 +21,12 @@ void	ft_sa(t_stack *sort)
 		tmp = sort->cola[0];
 		sort->cola[0] = sort->cola[1];
 		sort->cola[1] = tmp;
+		if (is_rotate == 0)
+			ft_printf("sa\n");
 	}
 }
 
-void	ft_sb(t_stack *sort)
+void	ft_sb(t_stack *sort, int is_rotate)
 {
 	int	tmp;
 
@@ -33,11 +35,13 @@ void	ft_sb(t_stack *sort)
 		tmp = sort->colb[0];
 		sort->colb[0] = sort->colb[1];
 		sort->colb[1] = tmp;
+		if (is_rotate == 0)
+			ft_printf("sb\n");
 	}
 }
 
 void	ft_ss(t_stack *sort)
 {
-	ft_sa(sort);
-	ft_sb(sort);
+	ft_sa(sort, 0);
+	ft_sb(sort, 0);
 }

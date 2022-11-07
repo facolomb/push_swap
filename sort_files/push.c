@@ -18,9 +18,10 @@ void	ft_pa(t_stack *sort)
 	{
 		sort->cola[sort->cola_size] = sort->colb[0];
 		sort->cola_size++;
-		ft_rra(sort);
-		ft_rb(sort);
+		ft_rra(sort, 1);
+		ft_rb(sort, 1);
 		sort->colb_size--;
+		ft_printf("pa\n");
 	}
 }
 
@@ -30,9 +31,10 @@ void	ft_pb(t_stack *sort)
 	{
 		sort->colb[sort->colb_size] = sort->cola[0];
 		sort->colb_size++;
-		ft_rrb(sort);
-		ft_ra(sort);
+		ft_rrb(sort, 1);
+		ft_ra(sort, 1);
 		sort->cola[sort->cola_size - 1] = '\0';
 		sort->cola_size--;
+		ft_printf("pb\n");
 	}
 }

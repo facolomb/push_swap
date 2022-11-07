@@ -1,6 +1,6 @@
-SRC				= push_swap.c 
+SRC				= push_swap.c check.c
 
-SORT 			= push.c swap.c rotate.c reverse_rotate.c
+SORT 			= push.c swap.c rotate.c reverse_rotate.c sort.c sort_five.c sort_big.c
 
 FOLDER_SORT 	= sort_files/
 

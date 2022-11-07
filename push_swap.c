@@ -21,63 +21,37 @@ int	ft_pointer_size(char **str)
 	return (i);
 }
 
-void	ft_is_duplicate(t_stack *sort, int i)
-{
-	int	check;
-
-	check = sort->cola[i];
-	while(i != 0)
-	{
-		if (check == sort->cola[--i])
-		{
-			ft_printf("Doublon ! %d\n", sort->cola[i]);
-			free(sort->cola);
-			free(sort->colb);
-			exit(0);
-		}
-	}
-}
-
 void	ft_init_stack(t_stack *sort, char **str, int c)
 {
-	int	i;
-	int	nb_arg;
+	int		i;
+	int		nb_arg;
+	long	tmp;
 
 	i = 0;
 	nb_arg = ft_pointer_size(str);
 	sort->cola_size = nb_arg - c;
+	sort->max_size = sort->cola_size;
 	sort->colb_size = 0;
 	sort->cola = ft_calloc(sizeof(int), sort->cola_size);
 	sort->colb = ft_calloc(sizeof(int), sort->cola_size);
 	while (i < sort->cola_size)
 	{
-		sort->cola[i] = ft_atoi(str[i + c]);
+		if (!(ft_isalldigit(str[i + c])))
+			ft_exit(sort);
+		tmp = ft_atoi_long(str[i + c]);
+		if (tmp < -2147483648 || tmp > 2147483647)
+			ft_exit(sort);
+		sort->cola[i] = tmp;
 		ft_is_duplicate(sort, i);
 		i++;
 	}
-}
-
-int	ft_is_a_sort(t_stack *sort)
-{
-	int	i;
-
-	i = 0;
-	while (i < sort->cola_size - 1)
-	{
-		if (sort->cola[i] > sort->cola[i + 1])
-			return (0);
-		i++;
-	}
-	return (1);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	sort;
 	char	**str;
-	int	i;
 
-	i = 0;
 	if (argc >= 2)
 	{
 		if (argc == 2)
@@ -87,14 +61,10 @@ int	main(int argc, char **argv)
 		}
 		else
 			ft_init_stack(&sort, argv, 1);
-		while (i < sort.cola_size)
-		{
-			ft_printf("%d\n", sort.cola[i]);
-			i++;
-		}
-		ft_printf("Is already sort : %d\n", ft_is_a_sort(&sort));
+		if (!(ft_is_a_sort(&sort)))
+			ft_sort(&sort);
+		free(sort.cola);
+		free(sort.colb);
 	}
-	else
-		ft_printf("Missing arguments\n");
 	return (0);
 }
